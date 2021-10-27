@@ -1,7 +1,6 @@
 package ServerSideMethods.AcceptFilesTests;
 
 
-import Config.Config;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -14,12 +13,11 @@ import static org.junit.Assert.assertTrue;
 public class AcceptFilesTestNegative {
 
     @Test
-    public void testPathFile() throws IOException {
+    public void testPathFileP() throws IOException {
         /**
          * @param
          * @filePath String with path to file
          */
-        Config config = new Config();
         String filepath = "D:\\Manik\\ServerTCP\\Server\\src\\SavedFiles\\d112312.txt";
 
         Path path = Paths.get(filepath);

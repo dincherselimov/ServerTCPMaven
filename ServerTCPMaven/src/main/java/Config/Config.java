@@ -10,10 +10,12 @@ import java.util.Properties;
  */
 public class Config {
 
-    private final int port;
+    private final int TCPPort;
     private final String absolute_path;
-    private String file_name;
+    private final String file_name;
     private static Config instance = null;
+    private final int HTTPPort;
+    private final String host;
 
     //Define the config.properties file path
     FileInputStream FIS;
@@ -25,17 +27,19 @@ public class Config {
         }
     }
 
-    Properties prop;
+    Properties properties;
 
     //Loading the config.properties file
     public Config() throws IOException {
-        prop = new Properties();
-        prop.load(FIS);
+        properties = new Properties();
+        properties.load(FIS);
         FIS.close();
         //reading the element's content from config.properties
-        port = Integer.parseInt(prop.getProperty("port"));
-        absolute_path = new String(prop.getProperty("absolute_path"));
-        file_name = new String(prop.getProperty("file_name"));
+        TCPPort = Integer.parseInt(properties.getProperty("TCPPort"));
+        absolute_path = properties.getProperty("absolute_path");
+        file_name = properties.getProperty("file_name");
+        HTTPPort = Integer.parseInt(properties.getProperty("HTTPPort"));
+        host = properties.getProperty("host");
     }
     //Using Singleton method
     public static Config getInstance() throws IOException {
@@ -46,10 +50,18 @@ public class Config {
     }
     //---------------------------------------------------------------------//
     //Getters
-    public int getPort(){return this.port;}
+    public int getPort(){return this.TCPPort;}
 
     public String getAbsolute_path(){return this.absolute_path;}
 
     public String getFile_name(){return this.file_name;}
+
+    public int getHTTPPort() {
+        return HTTPPort;
+    }
+
+    public String getHost() {
+        return host;
+    }
 }
 

@@ -51,7 +51,7 @@ public class AcceptFilesTestPositive {
             System.out.println("Program doesn't have access to the file!!");
         }
         //Compares the two names
-        assertEquals("D:\\Manik\\ServerTCP\\Server\\src\\SavedFiles\\dincher.txt", filepath);
+        assertEquals("D:\\Manik\\ServerTCPMaven\\ServerTCPMaven\\src\\main\\java\\SavedFiles\\dincher.txt", filepath);
         System.out.println("There is a file with that name, uploaded successfully!!");
     }
 
