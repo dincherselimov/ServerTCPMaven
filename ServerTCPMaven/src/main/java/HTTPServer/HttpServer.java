@@ -1,7 +1,5 @@
 package HTTPServer;
 
-import Config.Config;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.util.concurrent.Executors;
@@ -25,14 +23,6 @@ public class HttpServer {
         this.host = host;
         this.port = port;
     }
-    //Execute the ServerStart method
-    public static void main(String[] args) throws IOException {
-        HttpServer server = new HttpServer(Config.getInstance().getHost(),
-                Config.getInstance().getHTTPPort());
-
-        server.serverStart();
-    }
-
     /**
      * Connecting to localhost on port 9000
      * Creating httpContext
@@ -55,7 +45,7 @@ public class HttpServer {
 
         //start the server
         server.start();
-        System.out.println("Server started on port 9000");
+        System.out.println("Server started at port 9000");
     }
 
     public void stop() {

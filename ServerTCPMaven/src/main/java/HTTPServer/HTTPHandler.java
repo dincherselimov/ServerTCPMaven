@@ -1,5 +1,9 @@
 package HTTPServer;
 
+
+import Config.Config;
+import MaNik.File.MNFileLib;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 
@@ -45,13 +49,18 @@ public class HTTPHandler implements HttpHandler {
      */
     private String handleGetRequest(HttpExchange httpExchange) throws IOException {
 
-        File file = new File("D:\\Manik\\ServerTCPMaven\\ServerTCPMaven\\src\\main\\java\\SavedFiles\\test1.xml");
-        FileInputStream fis = new FileInputStream(file);
-        byte[] data = new byte[(int) file.length()];
-        fis.read(data);
-        fis.close();
+        //Using the MaNik external library to read the file
+        MNFileLib fileRead = new MNFileLib();
+        //Using readFile method do read the file
+        String toPrint = fileRead.readFile("D:\\Manik\\ServerTCPMaven\\ServerTCPMaven\\src\\main\\java\\SavedFiles\\test1.xml");
 
-        return new String(data, StandardCharsets.UTF_8);
+        byte[] response = toPrint.getBytes();
+        httpExchange.sendResponseHeaders(200, response.length);
+        OutputStream os = httpExchange.getResponseBody();
+        os.write(response);
+        os.close();
+
+        return httpExchange.getRequestMethod();
     }
 
     /**
@@ -71,18 +80,13 @@ public class HTTPHandler implements HttpHandler {
         byte []b = bodyStream.readAllBytes();
         String toWrite = new String(b);
 
-        try {
-            //Save the incoming data to a file
-            FileWriter putWriter = new FileWriter("D:\\Manik\\ServerTCPMaven\\ServerTCPMaven\\src\\main\\java\\SavedFiles\\test1.xml");
-            putWriter.write(toWrite);
+        //Using the MaNik external library to write the file
+        MNFileLib fileWrite = new MNFileLib();
+        //Using writeToFile method do read the file
+        fileWrite.writeToFile(toWrite, "D:\\Manik\\ServerTCPMaven\\ServerTCPMaven\\src\\main\\java\\SavedFiles\\t223232.xml");
+        //Printing the written file
+        System.out.println(toWrite);
 
-            //close the connection
-            putWriter.close();
-            System.out.println("Successfully wrote to the file.");
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
         return httpExchange.getRequestMethod();
     }
 
