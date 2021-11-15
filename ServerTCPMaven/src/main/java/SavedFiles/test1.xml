@@ -1,8 +1,9 @@
 <note>
     <to>John</to>
     <from>David</from>
-    <heading>TYPE</heading>
-    <body>Some body data</body>
-    <body>Some body data</body>
-    <body>helloooooooooo</body>
+    <to>John</to>
+    <from>David</from>
+    <to>John</to>
+    <from>David</from> <to>John</to>
+    <from>David</from>
 </note>

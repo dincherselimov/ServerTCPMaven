@@ -18,14 +18,12 @@ import java.net.URL;
 public class HttpFileServerTest {
 
     //Before everything start the server
-    @Before
     public void setServer() throws IOException {
         HttpServer server = new HttpServer(Config.getInstance().getHost(), Config.getInstance().getPort());
         server.serverStart();
     }
 
     //Stop the server after the test
-    @After
     public void tearDown() throws IOException {
         HttpServer server = new HttpServer(Config.getInstance().getHost(), Config.getInstance().getPort());
         server.stop();
@@ -43,7 +41,6 @@ public class HttpFileServerTest {
     @Test
     public void testDownload() throws IOException {
         setServer();
-
         //URL from HTTP Server
         URL url = new URL("http://localhost:9000/st");
         //Reading the uploaded file
@@ -51,8 +48,7 @@ public class HttpFileServerTest {
         //Printing the uploaded file
         in.lines().forEach(System.out::println);
         in.close();
-
-        tearDown();
+      tearDown();
     }
 
     @Test
